@@ -18,17 +18,19 @@ The name: beads on a thread — individual tasks, in order, connected.
 
 ---
 
-## The 7 commands
+## The 9 commands
 
 | Command | Phase | What it does |
 |---|---|---|
-| `/plan` | Planning | Grill session to resolve alignment → beads epic + tasks with dependency wiring |
-| `/work` | Execution | Claim a task, implement with TDD (red → green → refactor), close it |
-| `/diagnose` | Execution | Debug a bug: reproduce → minimise → fix → regression test |
-| `/qa` | Quality | Conversational bug intake → beads tasks |
-| `/refactor` | Maintenance | Plan a refactor as tiny safe commits → beads tasks |
-| `/improve-arch` | Maintenance | Find shallow modules and architecture friction → beads refactor epic |
-| `/land` | Wrap-up | Close tasks, push, write session handoff |
+| `/th:plan` | Planning | Grill session to resolve alignment → beads epic + tasks with dependency wiring |
+| `/th:work` | Execution | Claim a task, implement with TDD (red → green → refactor), close it |
+| `/th:diagnose` | Execution | Debug a bug: reproduce → minimise → fix → regression test |
+| `/th:qa` | Quality | Conversational bug intake → beads tasks |
+| `/th:refactor` | Maintenance | Plan a refactor as tiny safe commits → beads tasks |
+| `/th:improve-arch` | Maintenance | Find shallow modules and architecture friction → beads refactor epic |
+| `/th:land` | Wrap-up | Close tasks, push, write session handoff |
+| `/th:context` | Utility | Build or review `CONTEXT.md` domain vocabulary |
+| `/th:caveman` | Utility | Switch Claude to ultra-compressed output mode |
 
 ---
 
@@ -44,20 +46,17 @@ cd ~/skills/threaded
 ./install.sh
 ```
 
-This symlinks every skill into `~/.claude/commands/`. Because they are symlinks,
+This symlinks every skill into `~/.claude/commands/th/`. Because they are symlinks,
 `git pull` in this directory updates all your installed skills automatically — no
 re-install needed.
-
-> If you install skills from multiple repos, names must not conflict. If two repos
-> both provide a `plan.md`, the second install wins. Rename one to disambiguate.
 
 ### Project-level
 
 Copy individual skills into your project:
 
 ```bash
-cp skills/plan.md .claude/commands/plan.md
-cp skills/work.md .claude/commands/work.md
+cp skills/th/plan.md .claude/commands/th/plan.md
+cp skills/th/work.md .claude/commands/th/work.md
 ```
 
 ### Prerequisite
@@ -76,18 +75,19 @@ bd --version
 A typical session looks like this:
 
 ```
-/plan          → agree on what to build; loads an epic + tasks into beads
-/work          → implement one task at a time with TDD
-/diagnose      → if a bug blocks progress mid-task
-/qa            → after shipping a feature, capture issues
-/land          → close out, push, leave a handoff note for the next session
+/th:context    → define domain vocabulary (new projects, or when CONTEXT.md is stale)
+/th:plan       → agree on what to build; loads an epic + tasks into beads
+/th:work       → implement one task at a time with TDD
+/th:diagnose   → if a bug blocks progress mid-task
+/th:qa         → after shipping a feature, capture issues
+/th:land       → close out, push, leave a handoff note for the next session
 ```
 
 Run these periodically to keep the architecture healthy:
 
 ```
-/improve-arch  → surfaces refactor opportunities as beads tasks
-/refactor      → when a specific refactor is identified; plans a safe commit sequence
+/th:improve-arch  → surfaces refactor opportunities as beads tasks
+/th:refactor      → when a specific refactor is identified; plans a safe commit sequence
 ```
 
 ---
@@ -96,13 +96,13 @@ Run these periodically to keep the architecture healthy:
 
 **beads is the single source of truth for work.** No task lives only in your head or in a comment. Any session can resume from `bd ready` without losing context.
 
-**TDD is the default, not an option.** `/work` runs red → green → refactor for every task. Horizontal slicing (all tests first, then all code) is explicitly an anti-pattern.
+**TDD is the default, not an option.** `/th:work` runs red → green → refactor for every task. Horizontal slicing (all tests first, then all code) is explicitly an anti-pattern.
 
 **Scope creep is filed, not done.** Every command has a standard pattern: if something related-but-not-in-scope is noticed, file a beads task and continue. Nothing is done opportunistically mid-task.
 
 **Domain language is non-negotiable.** Every command reads `CONTEXT.md` before doing anything. Test names, variable names, commit messages, and task titles all use domain vocabulary.
 
-**Commands are composable.** Adopt just `/plan` and `/work` if that's all you need. There is no required ceremony. Each command is a standalone file you can read and understand in two minutes.
+**Commands are composable.** Adopt just `/th:plan` and `/th:work` if that's all you need. There is no required ceremony. Each command is a standalone file you can read and understand in two minutes.
 
 ---
 

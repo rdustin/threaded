@@ -1,4 +1,4 @@
-# /qa — Conversational Bug Intake → Beads Tasks
+# /th:qa — Conversational Bug Intake → Beads Tasks
 
 Use this command to do a QA pass after shipping a feature, or to report a batch of
 issues conversationally. Describe bugs and rough edges as you find them; the agent

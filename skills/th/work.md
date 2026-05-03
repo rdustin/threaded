@@ -1,10 +1,10 @@
-# /work [task-id?] — Claim, Implement, and Close a Beads Task
+# /th:work [task-id?] — Claim, Implement, and Close a Beads Task
 
 Use this command to execute a single unit of work tracked in beads. Provide a task ID
 to work a specific task, or omit it to auto-select the best ready task.
 
 Implementation defaults to TDD (red → green → refactor). For bug tasks, use
-`/diagnose` instead — it has a dedicated debugging loop.
+`/th:diagnose` instead — it has a dedicated debugging loop.
 
 ---
 
@@ -100,12 +100,12 @@ Repeat for the next behavior.
 
 ### If you hit a mystery bug mid-task
 
-Stop, file a blocker, switch to `/diagnose`:
+Stop, file a blocker, switch to `/th:diagnose`:
 ```bash
 BLOCKER=$(bd create "Bug: <description>" -t bug -p 0 --json | jq -r '.id')
 bd dep add <current-id> $BLOCKER
 ```
-Report back: "Found a blocking bug — filed `$BLOCKER`. Run `/diagnose $BLOCKER` to fix it first."
+Report back: "Found a blocking bug — filed `$BLOCKER`. Run `/th:diagnose $BLOCKER` to fix it first."
 
 ### If you notice scope creep
 

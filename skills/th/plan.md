@@ -1,4 +1,4 @@
-# /plan — Align, Specify, and Load into Beads
+# /th:plan — Align, Specify, and Load into Beads
 
 Use this command when you want to plan a new feature, fix, or change. It runs a structured alignment session, then writes the output directly into beads as an Epic with child tasks.
 
@@ -115,4 +115,4 @@ bd ready --json | jq '[.[] | {id, title, status, priority}]'
 Report back:
 - The epic ID and all task IDs
 - Which tasks are immediately ready (unblocked)
-- Suggested first task to start with: `"To begin, run /work $TASK_ID"`
+- Suggested first task to start with: `"To begin, run /th:work $TASK_ID"`

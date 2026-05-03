@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SKILLS_DIR="$(cd "$(dirname "$0")/skills" && pwd)"
-COMMANDS_DIR="$HOME/.claude/commands"
+SKILLS_DIR="$(cd "$(dirname "$0")/skills/th" && pwd)"
+COMMANDS_DIR="$HOME/.claude/commands/th"
 
 mkdir -p "$COMMANDS_DIR"
 

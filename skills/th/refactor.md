@@ -1,4 +1,4 @@
-# /refactor — Plan a Refactor as Tiny Safe Commits → Beads Tasks
+# /th:refactor — Plan a Refactor as Tiny Safe Commits → Beads Tasks
 
 Use this when you want to clean up or restructure existing code. It interviews you
 about the change, designs a sequence of tiny commits that each leave the codebase
@@ -103,7 +103,7 @@ EOF
 
 Report:
 - Epic ID and all step task IDs
-- First step is immediately workable: `"Start with /work <T1>"`
+- First step is immediately workable: `"Start with /th:work <T1>"`
 - Estimated total steps and rough size
 
 ---

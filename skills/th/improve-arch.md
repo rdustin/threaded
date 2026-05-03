@@ -1,11 +1,11 @@
-# /improve-arch — Find Architecture Problems → Beads Refactor Epic
+# /th:improve-arch — Find Architecture Problems → Beads Refactor Epic
 
 Run this every few days, or whenever a codebase area has been growing fast. It finds
 "deepening opportunities" — places where shallow modules can be consolidated into deep
 ones — and files them as a beads epic with child tasks.
 
 It does NOT make changes. It produces a prioritised list, you pick what to pursue,
-then those become tasks you can run `/work` on.
+then those become tasks you can run `/th:work` on.
 
 ---
 

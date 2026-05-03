@@ -1,4 +1,4 @@
-# /caveman — Ultra-compressed Communication Mode
+# /th:caveman — Ultra-compressed Communication Mode
 
 Switches Claude into caveman mode — terse, token-efficient output with full technical accuracy preserved. Part of the threaded workflow. No beads integration; this command only changes how Claude communicates.
 

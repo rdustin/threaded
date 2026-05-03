@@ -1,6 +1,6 @@
-# /context — Build and Maintain Domain Vocabulary
+# /th:context — Build and Maintain Domain Vocabulary
 
-Run this command before `/plan` on a new project, or whenever `CONTEXT.md` feels stale. It interviews you to produce a precise domain glossary that every other threaded command reads before acting.
+Run this command before `/th:plan` on a new project, or whenever `CONTEXT.md` feels stale. It interviews you to produce a precise domain glossary that every other threaded command reads before acting.
 
 No beads integration — this command produces one output: a committed `CONTEXT.md`.
 
@@ -75,4 +75,4 @@ git add CONTEXT.md
 git commit -m "docs: update CONTEXT.md with domain vocabulary"
 ```
 
-Report: **"`CONTEXT.md` is up to date with `<n>` terms. Ready to run `/plan`."**
+Report: **"`CONTEXT.md` is up to date with `<n>` terms. Ready to run `/th:plan`."**

@@ -8,14 +8,14 @@ commit messages, and task titles.
 
 ## Quick facts
 
-- Skills live in `skills/*.md`. Users install by copying to their project's `.claude/commands/`.
-- The 9 commands are: `/context`, `/plan`, `/work`, `/diagnose`, `/qa`, `/refactor`, `/improve-arch`, `/land`, `/caveman`.
+- Skills live in `skills/th/*.md`. Users install via `./install.sh` (symlinks to `~/.claude/commands/th/`) or by copying to their project's `.claude/commands/th/`.
+- The 9 commands are: `/th:context`, `/th:plan`, `/th:work`, `/th:diagnose`, `/th:qa`, `/th:refactor`, `/th:improve-arch`, `/th:land`, `/th:caveman`.
 - beads (`bd`) is the task persistence layer. Every command reads from or writes to it.
 
 ## Hard constraints
 
-- Run `/context` before `/plan` on new projects or when `CONTEXT.md` is stale — domain vocabulary must exist before planning begins.
-- Do not add a feature without running a grilling session (`/plan`) first.
+- Run `/th:context` before `/th:plan` on new projects or when `CONTEXT.md` is stale — domain vocabulary must exist before planning begins.
+- Do not add a feature without running a grilling session (`/th:plan`) first.
 - Every skill must leave the user's codebase in a green, committed state when it exits.
 - Scope creep is filed as a beads task, never done mid-command.
 - All new domain terms go into `CONTEXT.md` immediately — not at the end of a session.

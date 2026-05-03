@@ -1,4 +1,4 @@
-# /land — Close Out a Session
+# /th:land — Close Out a Session
 
 Use this command when you're done for the session and want to leave the repo in a clean, resumable state. Wraps up code, beads, and context — and leaves a clear "pick up here" note.
 

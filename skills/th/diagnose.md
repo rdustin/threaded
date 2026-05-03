@@ -1,4 +1,4 @@
-# /diagnose [task-id?] — Debug a Bug or Performance Regression
+# /th:diagnose [task-id?] — Debug a Bug or Performance Regression
 
 Use this command when something is broken and you don't know why. It runs a disciplined
 reproduce → minimise → hypothesise → instrument → fix → regression-test loop.

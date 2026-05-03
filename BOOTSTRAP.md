@@ -55,37 +55,38 @@ Key concepts carried over:
 
 ## The 9 Commands
 
-All commands live in `skills/`. Install them by copying to your project's
-`.claude/commands/` directory, or to `~/.claude/commands/` for global use.
+All commands live in `skills/th/`. Install them globally via `./install.sh` (symlinks
+to `~/.claude/commands/th/`), or copy individual files to your project's
+`.claude/commands/th/` directory.
 
 | Command | Phase | Purpose |
 |---|---|---|
-| `/plan` | Planning | Grill session → beads epic + tasks with dependency wiring |
-| `/work [id?]` | Execution | Claim a task, implement with TDD, close it |
-| `/diagnose [id?]` | Execution | Debug a bug: reproduce → minimise → fix → regression test |
-| `/qa` | Quality | Conversational bug intake → beads tasks |
-| `/refactor` | Maintenance | Plan a refactor as tiny safe commits → beads tasks |
-| `/improve-arch` | Maintenance | Find architecture problems → beads refactor epic |
-| `/land` | Wrap-up | Close tasks, push, write session handoff |
-| `/context` | Utility | Build or review `CONTEXT.md` domain vocabulary |
-| `/caveman` | Utility | Switch Claude to ultra-compressed output mode |
+| `/th:plan` | Planning | Grill session → beads epic + tasks with dependency wiring |
+| `/th:work [id?]` | Execution | Claim a task, implement with TDD, close it |
+| `/th:diagnose [id?]` | Execution | Debug a bug: reproduce → minimise → fix → regression test |
+| `/th:qa` | Quality | Conversational bug intake → beads tasks |
+| `/th:refactor` | Maintenance | Plan a refactor as tiny safe commits → beads tasks |
+| `/th:improve-arch` | Maintenance | Find architecture problems → beads refactor epic |
+| `/th:land` | Wrap-up | Close tasks, push, write session handoff |
+| `/th:context` | Utility | Build or review `CONTEXT.md` domain vocabulary |
+| `/th:caveman` | Utility | Switch Claude to ultra-compressed output mode |
 
 ### Typical session flow
 
 ```
-/context       → define domain vocabulary (new projects, or when CONTEXT.md is stale)
-/plan          → agree on what to build, load into beads
-/work          → implement one task at a time (TDD by default)
-/diagnose      → if a bug blocks progress mid-task
-/qa            → after shipping a feature, capture issues
-/land          → close out, push, leave handoff for next session
+/th:context       → define domain vocabulary (new projects, or when CONTEXT.md is stale)
+/th:plan          → agree on what to build, load into beads
+/th:work          → implement one task at a time (TDD by default)
+/th:diagnose      → if a bug blocks progress mid-task
+/th:qa            → after shipping a feature, capture issues
+/th:land          → close out, push, leave handoff for next session
 ```
 
 ### Periodic maintenance
 
 ```
-/improve-arch  → every few days; surfaces refactor opportunities as beads tasks
-/refactor      → when a specific refactor is identified; plans safe commit sequence
+/th:improve-arch  → every few days; surfaces refactor opportunities as beads tasks
+/th:refactor      → when a specific refactor is identified; plans safe commit sequence
 ```
 
 ---
@@ -98,7 +99,7 @@ Planning output goes into beads. Bug reports go into beads. Architecture finding
 go into beads. This means any session can resume from `bd ready` without losing context.
 
 **TDD is the default, not an option.**
-`/work` runs red → green → refactor for every task. Horizontal slicing (all tests
+`/th:work` runs red → green → refactor for every task. Horizontal slicing (all tests
 first, then all code) is explicitly called out as an anti-pattern. Tests are written
 against public interfaces, not internals.
 
@@ -112,12 +113,12 @@ commit messages, and beads task titles all use domain vocabulary. If a new term
 emerges during a session, `CONTEXT.md` is updated inline.
 
 **Commands are composable, not a framework.**
-A team can adopt just `/plan` and `/work`. Or just `/diagnose`. There is no
+A team can adopt just `/th:plan` and `/th:work`. Or just `/th:diagnose`. There is no
 required ceremony. Each command is a standalone file that can be read and understood
 in two minutes.
 
 **Token efficiency is a first-class concern.**
-`bd list` and `bd ready` are piped through `jq` to return only `id`, `title`, `status`, and `priority` — the full JSON payload is never dumped raw. For output, `/caveman` switches Claude into ultra-compressed mode, cutting response tokens ~75% while keeping full technical accuracy.
+`bd list` and `bd ready` are piped through `jq` to return only `id`, `title`, `status`, and `priority` — the full JSON payload is never dumped raw. For output, `/th:caveman` switches Claude into ultra-compressed mode, cutting response tokens ~75% while keeping full technical accuracy.
 
 ---
 
@@ -155,7 +156,7 @@ The domain terms used in this repo itself (for agents working on threaded):
 - **epic** — a parent grouping of tasks in beads (type: epic)
 - **upstream** — either gastownhall/beads or mattpocock/skills
 - **beads task** — a task tracked via the `bd` CLI
-- **TDD loop** — red → green → refactor cycle within `/work`
+- **TDD loop** — red → green → refactor cycle within `/th:work`
 - **grilling** — asking one question at a time to resolve alignment before committing
   to an approach
 - **domain vocabulary** — the terms defined in a project's `CONTEXT.md`
