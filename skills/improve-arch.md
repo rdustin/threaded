@@ -30,7 +30,7 @@ Read silently:
 - `CONTEXT.md` — domain vocabulary that names good seams
 - `docs/adr/` — decisions not to re-litigate
 - Recent git log: `git log --oneline -20` — which areas have been active?
-- Current open beads work: `bd list --json` — avoid proposing what's already planned
+- Current open beads work: `bd list --json | jq '[.[] | {id, title, status, priority}]'` — avoid proposing what's already planned
 
 ---
 
@@ -122,7 +122,7 @@ bd show $EPIC --json
 
 Report:
 - The epic ID and all task IDs
-- Which are immediately workable (`bd ready --json`)
+- Which are immediately workable (`bd ready --json | jq '[.[] | {id, title, status, priority}]'`)
 - Suggested order: "Start with `<id>` — it unblocks the most and has the clearest interface."
 
 ---

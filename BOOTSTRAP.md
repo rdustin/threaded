@@ -53,7 +53,7 @@ Key concepts carried over:
 
 ---
 
-## The 7 Commands
+## The 8 Commands
 
 All commands live in `skills/`. Install them by copying to your project's
 `.claude/commands/` directory, or to `~/.claude/commands/` for global use.
@@ -67,6 +67,7 @@ All commands live in `skills/`. Install them by copying to your project's
 | `/refactor` | Maintenance | Plan a refactor as tiny safe commits → beads tasks |
 | `/improve-arch` | Maintenance | Find architecture problems → beads refactor epic |
 | `/land` | Wrap-up | Close tasks, push, write session handoff |
+| `/caveman` | Utility | Switch Claude to ultra-compressed output mode |
 
 ### Typical session flow
 
@@ -113,6 +114,9 @@ A team can adopt just `/plan` and `/work`. Or just `/diagnose`. There is no
 required ceremony. Each command is a standalone file that can be read and understood
 in two minutes.
 
+**Token efficiency is a first-class concern.**
+`bd list` and `bd ready` are piped through `jq` to return only `id`, `title`, `status`, and `priority` — the full JSON payload is never dumped raw. For output, `/caveman` switches Claude into ultra-compressed mode, cutting response tokens ~75% while keeping full technical accuracy.
+
 ---
 
 ## Repo Structure
@@ -131,7 +135,8 @@ in two minutes.
     ├── qa.md
     ├── refactor.md
     ├── improve-arch.md
-    └── land.md
+    ├── land.md
+    └── caveman.md
 ```
 
 ---

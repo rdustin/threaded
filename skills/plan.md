@@ -8,7 +8,7 @@ Use this command when you want to plan a new feature, fix, or change. It runs a 
 
 Before asking anything, do the following silently:
 
-1. Run `bd list --json` to understand current open work and epics.
+1. Run `bd list --json | jq '[.[] | {id, title, status, priority}]'` to understand current open work and epics.
 2. If `CONTEXT.md` exists at the repo root, read it for domain language.
 3. If `docs/adr/` exists, scan for relevant decisions.
 4. Run `git log --oneline -10` to understand recent activity.
@@ -109,7 +109,7 @@ bd dep add $T3 $T1   # T3 is blocked by T1
 After loading, run:
 ```bash
 bd show $EPIC --json
-bd ready --json
+bd ready --json | jq '[.[] | {id, title, status, priority}]'
 ```
 
 Report back:

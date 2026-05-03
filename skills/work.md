@@ -17,7 +17,7 @@ bd show <id> --json
 
 **If no task ID was provided**, find the best ready task:
 ```bash
-bd ready --json
+bd ready --json | jq '[.[] | {id, title, status, priority}]'
 ```
 
 Pick the highest-priority unblocked task. If multiple tie on priority, prefer the one
@@ -140,7 +140,7 @@ bd close <id> "<one-sentence summary of what was done>"
 
 Then:
 ```bash
-bd ready --json
+bd ready --json | jq '[.[] | {id, title, status, priority}]'
 ```
 
 Report:

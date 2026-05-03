@@ -14,7 +14,7 @@ reviewable and reversible.
 Read silently:
 - `CONTEXT.md` — domain vocabulary
 - `docs/adr/` — relevant past decisions
-- `bd list --json` — check if related work is already tracked
+- `bd list --json | jq '[.[] | {id, title, status, priority}]'` — check if related work is already tracked
 
 ---
 

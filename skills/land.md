@@ -109,7 +109,7 @@ Report the following:
 ## Step 7: Choose a Next Task (optional)
 
 ```bash
-bd ready --json
+bd ready --json | jq '[.[] | {id, title, status, priority}]'
 ```
 
 Suggest the best next task for the following session.

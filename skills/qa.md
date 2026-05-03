@@ -11,8 +11,8 @@ files them as beads tasks in the background.
 Before the session starts, orient silently:
 
 ```bash
-bd list --json          # understand current open work
-bd ready --json         # see what's in flight
+bd list --json | jq '[.[] | {id, title, status, priority}]'          # understand current open work
+bd ready --json | jq '[.[] | {id, title, status, priority}]'         # see what's in flight
 ```
 
 Read `CONTEXT.md` to use domain vocabulary in all task titles and descriptions.
@@ -44,7 +44,7 @@ Clear: "submitting the checkout form with an empty cart throws a 500"
 Silently look for context that will help triage the issue:
 - Relevant module or file
 - Whether a similar bug was fixed before (`git log --oneline --grep="<term>"`)
-- Whether there's an existing open task for this (`bd list --json | grep "<term>"`)
+- Whether there's an existing open task for this (`bd list --json | jq '[.[] | {id, title, status, priority}]' | grep "<term>"`)
 
 ### 3. File in beads
 
@@ -80,7 +80,7 @@ Report back: `"Filed <id>: <title> (P<n>). What's next?"`
 
 Before filing, check for duplicates:
 ```bash
-bd list --json | jq '.[] | select(.status == "open") | {id, title}'
+bd list --json | jq '[.[] | select(.status == "open") | {id, title, status, priority}]'
 ```
 
 If a clear duplicate exists, note it and skip filing (or `bd dep add` a relates_to link):
@@ -107,5 +107,5 @@ When the QA pass is done, summarise:
 1. <id>: <title> — <one-line reason>
 2. ...
 
-Run `bd ready --json` to see which are immediately workable.
+Run `bd ready --json | jq '[.[] | {id, title, status, priority}]'` to see which are immediately workable.
 ```
