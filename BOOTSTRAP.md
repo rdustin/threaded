@@ -53,7 +53,7 @@ Key concepts carried over:
 
 ---
 
-## The 8 Commands
+## The 9 Commands
 
 All commands live in `skills/`. Install them by copying to your project's
 `.claude/commands/` directory, or to `~/.claude/commands/` for global use.
@@ -67,11 +67,13 @@ All commands live in `skills/`. Install them by copying to your project's
 | `/refactor` | Maintenance | Plan a refactor as tiny safe commits → beads tasks |
 | `/improve-arch` | Maintenance | Find architecture problems → beads refactor epic |
 | `/land` | Wrap-up | Close tasks, push, write session handoff |
+| `/context` | Utility | Build or review `CONTEXT.md` domain vocabulary |
 | `/caveman` | Utility | Switch Claude to ultra-compressed output mode |
 
 ### Typical session flow
 
 ```
+/context       → define domain vocabulary (new projects, or when CONTEXT.md is stale)
 /plan          → agree on what to build, load into beads
 /work          → implement one task at a time (TDD by default)
 /diagnose      → if a bug blocks progress mid-task
@@ -136,6 +138,7 @@ in two minutes.
     ├── refactor.md
     ├── improve-arch.md
     ├── land.md
+    ├── context.md
     └── caveman.md
 ```
 
