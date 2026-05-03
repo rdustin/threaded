@@ -1,24 +1,40 @@
-# CLAUDE.md — Agent Orientation for `threaded` Contributors
+# Agent Instructions
 
-Read `BOOTSTRAP.md` first. It is the authoritative source for what this repo is,
-why it exists, and how the commands relate to each other.
+This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
-Then read `CONTEXT.md` for domain vocabulary. Use those terms everywhere — in edits,
-commit messages, and task titles.
+## Quick Reference
 
-## Quick facts
+```bash
+bd ready              # Find available work
+bd show <id>          # View issue details
+bd update <id> --claim  # Claim work atomically
+bd close <id>         # Complete work
+bd dolt push          # Push beads data to remote
+```
 
-- Skills live in `skills/*.md`. Users install by copying to their project's `.claude/commands/`.
-- The 7 commands are: `/plan`, `/work`, `/diagnose`, `/qa`, `/refactor`, `/improve-arch`, `/land`.
-- beads (`bd`) is the task persistence layer. Every command reads from or writes to it.
+## Non-Interactive Shell Commands
 
-## Hard constraints
+**ALWAYS use non-interactive flags** with file operations to avoid hanging on confirmation prompts.
 
-- Do not add a feature without running a grilling session (`/plan`) first.
-- Every skill must leave the user's codebase in a green, committed state when it exits.
-- Scope creep is filed as a beads task, never done mid-command.
-- All new domain terms go into `CONTEXT.md` immediately — not at the end of a session.
+Shell commands like `cp`, `mv`, and `rm` may be aliased to include `-i` (interactive) mode on some systems, causing the agent to hang indefinitely waiting for y/n input.
 
+**Use these forms instead:**
+```bash
+# Force overwrite without prompting
+cp -f source dest           # NOT: cp source dest
+mv -f source dest           # NOT: mv source dest
+rm -f file                  # NOT: rm file
+
+# For recursive operations
+rm -rf directory            # NOT: rm -r directory
+cp -rf source dest          # NOT: cp -r source dest
+```
+
+**Other commands that may prompt:**
+- `scp` - use `-o BatchMode=yes` for non-interactive
+- `ssh` - use `-o BatchMode=yes` to fail instead of prompting
+- `apt-get` - use `-y` flag
+- `brew` - use `HOMEBREW_NO_AUTO_UPDATE=1` env var
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 ## Beads Issue Tracker
