@@ -104,6 +104,14 @@ Run these periodically to keep the architecture healthy:
 
 **Commands are composable.** Adopt just `/th:plan` and `/th:work` if that's all you need. There is no required ceremony. Each command is a standalone file you can read and understand in two minutes.
 
+**Feature branches are opt-in.** By default `/th:work` commits directly to `main` (trunk-based). If your project uses a PR workflow, enable isolated branches per task:
+
+```bash
+bd config set workflow.feature-branches true
+```
+
+When enabled, `/th:work` creates a `beads-<id>-<title-slug>` branch at claim time (always from `main`, so sequential tasks don't stack) and merges it back before handing off to `/th:land`.
+
 ---
 
 ## License
