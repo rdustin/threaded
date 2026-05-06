@@ -35,6 +35,31 @@ Do not proceed until confirmed.
 bd update <id> --claim
 ```
 
+**If `workflow.feature-branches` is enabled**, create an isolated branch now:
+```bash
+# Check the flag
+FEATURE_BRANCHES=$(bd config get workflow.feature-branches 2>/dev/null || echo "false")
+
+if [ "$FEATURE_BRANCHES" = "true" ]; then
+  # Always branch from main to prevent stacked-branch chains
+  git checkout main && git pull --rebase
+
+  SLUG=$(bd show <id> --json | jq -r '.title' \
+    | tr '[:upper:]' '[:lower:]' \
+    | sed 's/[^a-z0-9]/-/g' \
+    | sed 's/-\+/-/g' \
+    | cut -c1-40 \
+    | sed 's/-$//')
+  BRANCH="beads-<id>-${SLUG}"
+
+  # Idempotent: check out existing branch or create it
+  git checkout "$BRANCH" 2>/dev/null || git checkout -b "$BRANCH"
+fi
+```
+
+> **Enable feature branches:** `bd config set workflow.feature-branches true`
+> Leave unset (default: off) to keep committing directly to `main`.
+
 Then orient:
 
 1. Read the full task: `bd show <id> --json`
@@ -134,7 +159,20 @@ Do not close with failing tests.
 ```bash
 git add -A
 git commit -m "<description of change> (<task-id>)"
+```
 
+**If `workflow.feature-branches` is enabled**, merge back to `main` now — before `th:land`
+runs, since `th:land` pushes the current branch (not `main`):
+```bash
+if [ "$FEATURE_BRANCHES" = "true" ]; then
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git checkout main
+  git merge --no-ff "$BRANCH" -m "<description of change> (<task-id>)"
+  git branch -d "$BRANCH"
+fi
+```
+
+```bash
 bd close <id> "<one-sentence summary of what was done>"
 ```
 
